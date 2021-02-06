@@ -1,0 +1,11 @@
+.movies {
+  min-height: 91vh;
+  background-color: #1c1a69;
+  padding-top: 2rem;
+}
+
+.col-lg-3,
+.col-md-4,
+.col-sm-6 {
+  margin-bottom: 1.5rem;
+}
