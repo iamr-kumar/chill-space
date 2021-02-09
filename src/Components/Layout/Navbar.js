@@ -3,6 +3,7 @@ import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Sidebar from "./Sidebar";
+import NavLinks from "./NavLinks";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -43,6 +44,9 @@ const Navbar = () => {
           </Link>
         </div>
       </nav>
+      <div className="nav-links">
+        <NavLinks />
+      </div>
     </Fragment>
   );
 };

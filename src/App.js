@@ -8,6 +8,7 @@ import {
 import Navbar from "./Components/Layout/Navbar";
 import { Fragment } from "react";
 import Movies from "./Components/Movies/Movies";
+import MyMovies from "./Components/Movies/MyMovies";
 
 const App = () => {
   return (
@@ -15,8 +16,9 @@ const App = () => {
       <Router>
         <Navbar />
         <Switch>
-          <Redirect exact from="/" to="/movies" />
-          <Route exact path="/movies" component={Movies} />
+          <Redirect exact from="/" to="/movies/top" />
+          <Route exact path="/movies/top" component={Movies} />
+          <Route exact path="/movies/my-movies" component={MyMovies} />
         </Switch>
       </Router>
     </Fragment>
