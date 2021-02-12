@@ -26,7 +26,7 @@ const Movies = () => {
           <div className="row">
             {movies.length > 0 &&
               movies.map((movie, index) => (
-                <div className="col-lg-3 col-md-4 col-sm-6">
+                <div className="col-lg-3 col-md-4 col-sm-6 movies-container">
                   <SingleMovie movie={movie} key={index} />
                 </div>
               ))}

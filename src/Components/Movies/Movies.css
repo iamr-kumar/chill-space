@@ -6,4 +6,6 @@
 .col-md-4,
 .col-sm-6 {
   margin-bottom: 1.5rem;
+  display: flex;
+  align-items: stretch;
 }
