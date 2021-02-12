@@ -1,20 +1,25 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import config from "./../../config";
 import SingleMovie from "./SingleMovie";
 import axios from "axios";
 import "./Movies.css";
 
 const Movies = () => {
+  const { id } = useParams();
+
   const uri = `
-  https://api.themoviedb.org/3/trending/all/week?api_key=${config.movieDbAPI}`;
+  https://api.themoviedb.org/3/search/movie?api_key=${config.movieDbAPI}=en-US&page=1&include_adult=false&query=${id}`;
+
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
+    console.log(id);
     axios
       .get(uri)
       .then((res) => {
         setMovies(res.data.results);
-        // console.log(res.data.results);
+        console.log(res.data.results);
       })
       .catch((err) => console.log(err));
   }, []);
