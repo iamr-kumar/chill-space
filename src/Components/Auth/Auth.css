@@ -1,0 +1,37 @@
+.Auth {
+  width: 80%;
+}
+
+.Auth .container {
+  background: #f5f5f5;
+  border-radius: 1rem;
+}
+
+.Auth .header {
+  padding: 1rem 0;
+  font-family: "Merriweather Sans", sans-serif;
+  text-transform: uppercase;
+}
+
+.Auth .header h2 {
+  background: -webkit-linear-gradient(#5221e6, rgb(255, 166, 166));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  overflow: hidden;
+  letter-spacing: 2px;
+}
+
+.Auth form {
+  width: 70%;
+}
+
+.Auth .form-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Auth .form-group a,
+.Auth .form-group a:hover {
+  color: #5221e6;
+  text-decoration: none;
+}

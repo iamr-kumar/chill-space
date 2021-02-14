@@ -1,8 +1,26 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import Login from "./../Auth/Login";
+import Signup from "./../Auth/Signup";
 import "./Homepage.css";
 
 const Homepage = () => {
+  const [rightComponent, setRightComponent] = useState({
+    login: false,
+    signup: false,
+  });
+  const path = useLocation().pathname;
+  const { login, signup } = rightComponent;
+
+  useEffect(() => {
+    if (path === "/login") {
+      setRightComponent({ signup: false, login: true });
+    }
+    if (path === "/signup") {
+      setRightComponent({ login: false, signup: true });
+    }
+  }, [path]);
+
   return (
     <div className="Homepage">
       <div className="row">
@@ -10,22 +28,28 @@ const Homepage = () => {
           <img src="https://cdn.hipwallpaper.com/i/98/21/dUyCkp.jpg" alt="" />
         </div>
         <div className="col-md-5 left-part">
-          <div className="container">
-            <h2 className="title">
-              Chill <span>Space</span>
-            </h2>
-            <p>
-              Watch. <span>Read.</span> Play.
-            </p>
-            <div className="auth-buttons">
-              <Link to="#" className="btn">
-                Login
-              </Link>
-              <Link to="#" className="signup">
-                Signup
-              </Link>
+          {login ? (
+            <Login />
+          ) : signup ? (
+            <Signup />
+          ) : (
+            <div className="container">
+              <h2 className="title">
+                Chill <span>Space</span>
+              </h2>
+              <p>
+                Watch. <span>Read.</span> Play.
+              </p>
+              <div className="auth-buttons">
+                <Link to="#" className="btn">
+                  Login
+                </Link>
+                <Link to="#" className="signup">
+                  Signup
+                </Link>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
