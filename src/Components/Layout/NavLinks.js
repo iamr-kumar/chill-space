@@ -12,7 +12,7 @@ const NavLinks = () => {
             <Link to="/movies/top">Trending</Link>
           </div>
           <div className={`link ${path.includes("my") && "active"}`}>
-            <Link to="/movies/my-movies">My Movies</Link>
+            <Link to="/movies/my-movies">My Watchlist</Link>
           </div>
         </div>
       </div>

@@ -1,12 +1,12 @@
 import React, { Fragment, useState } from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
-import { Link, Redirect } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import NavLinks from "./NavLinks";
 import "./Navbar.css";
 
-const Navbar = () => {
+const Navbar = ({ history }) => {
   const [sidebar, setSidebar] = useState(false);
 
   const [searchVal, setSearchVal] = useState("");
@@ -16,7 +16,10 @@ const Navbar = () => {
   const handleSubmit = (e) => {
     // console.log(searchVal);
     e.preventDefault();
-    return <Redirect exact to={`movies/search/${searchVal}`} />;
+    const path = `/movies/search/${searchVal}`;
+    // console.log(path);
+    history.push(path);
+    setSearchVal("");
   };
 
   return (
@@ -62,4 +65,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default withRouter(Navbar);

@@ -21,7 +21,7 @@ const SearchMovieResult = (props) => {
         console.log(res.data.results);
       })
       .catch((err) => console.log(err.message));
-  }, []);
+  }, [id]);
 
   return (
     <Fragment>
