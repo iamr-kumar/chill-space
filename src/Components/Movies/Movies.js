@@ -1,12 +1,11 @@
 import React, { Fragment, useEffect, useState } from "react";
-import config from "./../../config";
 import SingleMovie from "./SingleMovie";
 import axios from "axios";
 import "./Movies.css";
 
 const Movies = () => {
   const uri = `
-  https://api.themoviedb.org/3/trending/all/week?api_key=${config.movieDbAPI}`;
+  https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.REACT_APP_MOVIEDB_API_KEY}`;
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {

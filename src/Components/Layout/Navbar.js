@@ -50,11 +50,9 @@ const Navbar = ({ history }) => {
           </form>
         </div>
         <div className="right-section">
+          <span>John Smith</span>
           <Link to="#" className="nav-link">
-            Login
-          </Link>
-          <Link to="#" className="nav-link btn signup">
-            Signup
+            Logout
           </Link>
         </div>
       </nav>

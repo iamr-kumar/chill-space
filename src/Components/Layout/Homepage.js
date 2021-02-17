@@ -41,10 +41,10 @@ const Homepage = () => {
                 Watch. <span>Read.</span> Play.
               </p>
               <div className="auth-buttons">
-                <Link to="#" className="btn">
+                <Link to="/login" className="btn">
                   Login
                 </Link>
-                <Link to="#" className="signup">
+                <Link to="/signup" className="signup">
                   Signup
                 </Link>
               </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "./../../Contexts/AuthContext";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -9,11 +10,36 @@ const Signup = () => {
     password1: "",
   });
 
+  const { signup } = useAuth();
+
+  const [alert, setAlert] = useState({
+    message: "",
+    type: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const { name, email, password, password1 } = formData;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    if (password !== password1) {
+      return setAlert({ message: "Passwords do no match", type: "danger" });
+    }
+    try {
+      setAlert({ message: "", type: "" });
+      await signup(email, password);
+      setAlert({ message: "Account created", type: "success" });
+    } catch (err) {
+      setAlert({ message: "Could not create account", type: "danger" });
+    }
+    setLoading(false);
+  };
 
   return (
     <div className="Auth">
@@ -21,7 +47,10 @@ const Signup = () => {
         <div className="header">
           <h2>Signup</h2>
         </div>
-        <form>
+        {alert.message && (
+          <div className={`alert alert-${alert.type}`}>{alert.message}</div>
+        )}
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
             <input
               type="text"
@@ -63,7 +92,9 @@ const Signup = () => {
             />
           </div>
           <div className="form-group">
-            <button className="btn">Signup</button>
+            <button className="btn" disabled={loading}>
+              Signup
+            </button>
             <span>
               <Link to="/login">Login</Link>
             </span>

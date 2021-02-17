@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
 import "./SingleMovie.css";
 import * as IoIcons from "react-icons/io";
 
@@ -6,15 +6,17 @@ const SingleMovie = ({ movie }) => {
   return (
     <Fragment>
       <div className="movie-container">
-        <div className="overview">
-          <h5>Overview</h5>
-          {movie.overview}
-        </div>
         <div className="image-container">
-          <img
-            src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-            alt="Movie Poster"
-          />
+          <div className="overview">
+            <h5>Overview</h5>
+            <p>{movie.overview}</p>
+          </div>
+          <div>
+            <img
+              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+              alt="Movie Poster"
+            />
+          </div>
         </div>
         <div className="movie-desc">
           <div className="upper-part">
