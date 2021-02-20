@@ -2,9 +2,11 @@ import React, { Fragment } from "react";
 import * as AiIcons from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
+import { useAuth } from "./../../Contexts/AuthContext";
 import "./Sidebar.css";
 
 const Sidebar = ({ isActive, toggleSidebar }) => {
+  const { currentUser } = useAuth();
   return (
     <Fragment>
       <nav className={isActive ? "sidebar active" : "sidebar"}>
@@ -22,7 +24,7 @@ const Sidebar = ({ isActive, toggleSidebar }) => {
             alt=""
             className="user-image"
           />
-          <h2 className="user-name">John Smith</h2>
+          <h2 className="user-name">{currentUser.name}</h2>
         </div>
         <ul className="nav-menu">
           {SidebarData.map((item, index) => {

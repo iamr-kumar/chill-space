@@ -4,6 +4,7 @@ import * as AiIcons from "react-icons/ai";
 import { Link, withRouter } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import NavLinks from "./NavLinks";
+import { useAuth } from "./../../Contexts/AuthContext";
 import "./Navbar.css";
 
 const Navbar = ({ history }) => {
@@ -12,6 +13,8 @@ const Navbar = ({ history }) => {
   const [searchVal, setSearchVal] = useState("");
 
   const toggleSidebar = () => setSidebar(!sidebar);
+
+  const { currentUser } = useAuth();
 
   const handleSubmit = (e) => {
     // console.log(searchVal);
@@ -50,7 +53,7 @@ const Navbar = ({ history }) => {
           </form>
         </div>
         <div className="right-section">
-          <span>John Smith</span>
+          <span>{currentUser.name}</span>
           <Link to="#" className="nav-link">
             Logout
           </Link>

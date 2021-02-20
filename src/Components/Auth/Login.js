@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useAuth } from "../../Contexts/AuthContext";
 import "./Auth.css";
 
 const Login = () => {
@@ -11,13 +12,40 @@ const Login = () => {
 
   const { email, password } = formData;
 
+  const { login } = useAuth();
+
+  const history = useHistory();
+
+  const [alert, setAlert] = useState({
+    message: "",
+    type: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      setAlert({ message: "", type: "" });
+      await login(email, password);
+      history.push("/movies/top");
+    } catch (err) {
+      setAlert({ message: "Invalid email or password", type: "danger" });
+    }
+    setLoading(false);
+  };
+
   return (
     <div className="Auth">
       <div className="container">
         <div className="header">
           <h2>Login</h2>
         </div>
-        <form>
+        {alert.message && (
+          <div className={`alert alert-${alert.type}`}>{alert.message}</div>
+        )}
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
             <input
               type="email"
@@ -39,7 +67,9 @@ const Login = () => {
             />
           </div>
           <div className="form-group">
-            <button className="btn">Login</button>
+            <button className="btn" disabled={loading}>
+              Login
+            </button>
             <span>
               <Link to="/signup">Signup</Link>
             </span>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "./../../Contexts/AuthContext";
 
 const Signup = () => {
@@ -19,6 +19,8 @@ const Signup = () => {
 
   const [loading, setLoading] = useState(false);
 
+  const history = useHistory();
+
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -33,8 +35,9 @@ const Signup = () => {
     }
     try {
       setAlert({ message: "", type: "" });
-      await signup(email, password);
+      await signup(email, password, name);
       setAlert({ message: "Account created", type: "success" });
+      history.push("/movies/top");
     } catch (err) {
       setAlert({ message: "Could not create account", type: "danger" });
     }
