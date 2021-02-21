@@ -6,6 +6,7 @@ import Movies from "./Components/Movies/Movies";
 import MyMovies from "./Components/Movies/MyMovies";
 import SearchMovieResult from "./Components/Movies/SearchMovieResult";
 import Homepage from "./Components/Layout/Homepage";
+import ProtectedRoute from "./ProtectedRoute";
 
 const App = () => {
   return (
@@ -18,9 +19,13 @@ const App = () => {
             <Route exact path="/signup" component={Homepage} />
             <div>
               <Navbar />
-              <Route exact path="/movies/top" component={Movies} />
-              <Route exact path="/movies/my-movies" component={MyMovies} />
-              <Route
+              <ProtectedRoute exact path="/movies/top" component={Movies} />
+              <ProtectedRoute
+                exact
+                path="/movies/my-movies"
+                component={MyMovies}
+              />
+              <ProtectedRoute
                 exact
                 path="/movies/search/:id"
                 component={SearchMovieResult}

@@ -14,7 +14,7 @@ const Navbar = ({ history }) => {
 
   const toggleSidebar = () => setSidebar(!sidebar);
 
-  const { currentUser } = useAuth();
+  const { currentUser, logout } = useAuth();
 
   const handleSubmit = (e) => {
     // console.log(searchVal);
@@ -23,6 +23,15 @@ const Navbar = ({ history }) => {
     // console.log(path);
     history.push(path);
     setSearchVal("");
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      history.push("/login");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -53,10 +62,10 @@ const Navbar = ({ history }) => {
           </form>
         </div>
         <div className="right-section">
-          <span>{currentUser.name}</span>
-          <Link to="#" className="nav-link">
+          <span>{currentUser ? currentUser.name : ""}</span>
+          <button to="#" className="btn ml-3" onClick={handleLogout}>
             Logout
-          </Link>
+          </button>
         </div>
       </nav>
       <div className="nav-links">

@@ -27,15 +27,24 @@ const AuthProvider = ({ children }) => {
     return auth.signInWithEmailAndPassword(email, password);
   };
 
+  const logout = () => {
+    return auth.signOut();
+  };
+
   useEffect(() => {
     const unsubscriber = auth.onAuthStateChanged((user) => {
-      db.collection("users")
-        .doc(user.email)
-        .get()
-        .then((data) => {
-          setCurrenUser(data.data());
-          setLoading(false);
-        });
+      if (user) {
+        db.collection("users")
+          .doc(user.email)
+          .onSnapshot((doc) => {
+            setCurrenUser(doc.data());
+            setLoading(false);
+          });
+      } else {
+        setCurrenUser(null);
+        setLoading(false);
+      }
+      // console.log(user);
     });
 
     return unsubscriber;
@@ -44,6 +53,7 @@ const AuthProvider = ({ children }) => {
   const value = {
     signup,
     login,
+    logout,
     currentUser,
   };
 

@@ -2,7 +2,11 @@ import React, { Fragment } from "react";
 import "./SingleMovie.css";
 import * as IoIcons from "react-icons/io";
 
-const SingleMovie = ({ movie }) => {
+const SingleMovie = ({ movie, handleButton }) => {
+  const handleClick = () => {
+    handleButton(movie);
+  };
+
   return (
     <Fragment>
       <div className="movie-container">
@@ -24,7 +28,7 @@ const SingleMovie = ({ movie }) => {
             <span className="rating">{movie.vote_average}</span>
           </div>
           <div className="lower-part">
-            <button className="btn btn-outline-success">
+            <button className="btn btn-outline-success" onClick={handleClick}>
               Add to watchlist{" "}
               <span>
                 <IoIcons.IoMdAdd />

@@ -24,7 +24,7 @@ const Sidebar = ({ isActive, toggleSidebar }) => {
             alt=""
             className="user-image"
           />
-          <h2 className="user-name">{currentUser.name}</h2>
+          <h2 className="user-name">{currentUser ? currentUser.name : ""}</h2>
         </div>
         <ul className="nav-menu">
           {SidebarData.map((item, index) => {
