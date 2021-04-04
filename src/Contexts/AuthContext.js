@@ -14,10 +14,11 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   const signup = (email, password, name) => {
-    return auth.createUserWithEmailAndPassword(email, password).then((user) => {
-      db.collection("users").doc(email).set({
+    return auth.createUserWithEmailAndPassword(email, password).then((data) => {
+      db.collection("users").doc(data.user.uid).set({
         name: name,
         email: email,
+        uid: data.user.uid,
         movies: [],
       });
     });
@@ -33,17 +34,17 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscriber = auth.onAuthStateChanged((user) => {
+      setCurrenUser(user);
       if (user) {
         db.collection("users")
-          .doc(user.email)
+          .doc(user.uid)
           .onSnapshot((doc) => {
             setCurrenUser(doc.data());
-            setLoading(false);
           });
       } else {
         setCurrenUser(null);
-        setLoading(false);
       }
+      setLoading(false);
       // console.log(user);
     });
 

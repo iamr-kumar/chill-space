@@ -1,5 +1,5 @@
 .navbar {
-  background: #010043;
+  background: #242582;
   display: flex;
   align-items: center;
   font-family: "Lato", sans-serif;
@@ -26,7 +26,7 @@
 }
 
 .btn {
-  background: #5221e6;
+  background: #f64c72;
   color: #f5f5f5;
 }
 

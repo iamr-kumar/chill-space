@@ -28,7 +28,7 @@ const Movies = () => {
     try {
       await db
         .collection("users")
-        .doc(currentUser.email)
+        .doc(currentUser.uid)
         .update({
           movies: firebase.firestore.FieldValue.arrayUnion(movie),
         });

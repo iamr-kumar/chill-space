@@ -1,5 +1,5 @@
 .sidebar {
-  background-color: #150051;
+  background-color: #242582;
   height: 100vh;
   width: 350px;
   display: flex;
@@ -81,7 +81,7 @@
 }
 
 .nav-text a:hover {
-  background-color: #5221e6;
+  background-color: #f64c72;
 }
 
 .nav-text span {

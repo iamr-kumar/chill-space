@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../Contexts/AuthContext";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import "./Auth.css";
 
 const Login = () => {
@@ -32,8 +33,8 @@ const Login = () => {
       history.push("/movies/top");
     } catch (err) {
       setAlert({ message: "Invalid email or password", type: "danger" });
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
@@ -68,7 +69,7 @@ const Login = () => {
           </div>
           <div className="form-group">
             <button className="btn" disabled={loading}>
-              Login
+              {!loading ? <CircularProgress color="#fffff" /> : "Login"}
             </button>
             <span>
               <Link to="/signup">Signup</Link>

@@ -36,7 +36,6 @@ const Signup = () => {
     try {
       setAlert({ message: "", type: "" });
       await signup(email, password, name);
-      setAlert({ message: "Account created", type: "success" });
       history.push("/movies/top");
     } catch (err) {
       setAlert({ message: "Could not create account", type: "danger" });
