@@ -11,8 +11,8 @@ import ProtectedRoute from "./ProtectedRoute";
 const App = () => {
   return (
     <div className="App">
-      <AuthProvider>
-        <Router>
+      <Router>
+        <AuthProvider>
           <Switch>
             <Route exact path="/" component={Homepage} />
             <Route exact path="/login" component={Homepage} />
@@ -32,8 +32,8 @@ const App = () => {
               />
             </div>
           </Switch>
-        </Router>
-      </AuthProvider>
+        </AuthProvider>
+      </Router>
     </div>
   );
 };

@@ -14,7 +14,7 @@ const Login = () => {
 
   const { email, password } = formData;
 
-  const { loginEmailAndPassword, signInWithGoogle } = useAuth();
+  const { loginEmailAndPassword, signInWithGoogle, currentUser } = useAuth();
 
   const history = useHistory();
 
@@ -31,7 +31,6 @@ const Login = () => {
     try {
       setAlert({ message: "", type: "" });
       await loginEmailAndPassword(email, password);
-      history.push("/movies/top");
     } catch (err) {
       setAlert({ message: "Invalid email or password", type: "danger" });
       setLoading(false);
@@ -42,7 +41,6 @@ const Login = () => {
     try {
       setAlert({ message: "", type: "" });
       await signInWithGoogle();
-      history.push("/movies/top");
     } catch (err) {
       setAlert({ message: "Could not sign in", type: "danger" });
       console.log(err);

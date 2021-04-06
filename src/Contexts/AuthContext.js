@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { auth, db, googleProvider } from "../firebase";
 
 const AuthContext = createContext();
@@ -12,6 +13,7 @@ export const useAuth = () => {
 const AuthProvider = ({ children }) => {
   const [currentUser, setCurrenUser] = useState();
   const [loading, setLoading] = useState(true);
+  const history = useHistory();
 
   const signupEmailAndPassword = (email, password, name) => {
     return auth.createUserWithEmailAndPassword(email, password).then((data) => {
@@ -53,12 +55,14 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscriber = auth.onAuthStateChanged((user) => {
+      // setCurrenUser(user);
       if (user) {
         db.collection("users")
           .doc(user.uid)
           .onSnapshot(
             (doc) => {
               setCurrenUser(doc.data());
+              history.push("/movies/top");
             },
             (err) => console.log(err.message)
           );

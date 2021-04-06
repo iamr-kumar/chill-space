@@ -38,7 +38,6 @@ const Signup = () => {
     try {
       setAlert({ message: "", type: "" });
       await signupEmailAndPassword(email, password, name);
-      history.push("/movies/top");
     } catch (err) {
       setAlert({ message: "Could not create account", type: "danger" });
       setLoading(false);
@@ -49,7 +48,6 @@ const Signup = () => {
     try {
       setAlert({ message: "", type: "" });
       await signInWithGoogle();
-      history.push("/movies/top");
     } catch (err) {
       setAlert({ message: "Could not sign in", type: "danger" });
       console.log(err);
