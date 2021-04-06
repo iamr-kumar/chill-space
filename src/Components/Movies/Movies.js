@@ -22,7 +22,7 @@ const Movies = () => {
         setMovies(res.data.results);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [uri]);
 
   const findMovie = (movie) => {
     var found = false;

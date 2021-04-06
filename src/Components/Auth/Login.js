@@ -27,12 +27,14 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       setAlert({ message: "", type: "" });
       await loginEmailAndPassword(email, password);
       history.push("/movies/top");
     } catch (err) {
       setAlert({ message: "Invalid email or password", type: "danger" });
+      setLoading(false);
     }
   };
 

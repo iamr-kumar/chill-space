@@ -27,7 +27,7 @@ const SearchMovieResult = (props) => {
         console.log(res.data.results);
       })
       .catch((err) => console.log(err.message));
-  }, [id]);
+  }, [uri]);
 
   const addMovieToWatchlist = async (movie) => {
     // console.log(movie);
