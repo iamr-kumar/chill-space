@@ -13,9 +13,9 @@ const AuthProvider = ({ children }) => {
   const [currentUser, setCurrenUser] = useState();
   const [loading, setLoading] = useState(true);
 
-  const signup = (email, password, name) => {
+  const signupEmailAndPassword = (email, password, name) => {
     return auth.createUserWithEmailAndPassword(email, password).then((data) => {
-      db.collection("users").doc(data.user.uid).set({
+      return db.collection("users").doc(data.user.uid).set({
         name: name,
         email: email,
         uid: data.user.uid,
@@ -24,7 +24,7 @@ const AuthProvider = ({ children }) => {
     });
   };
 
-  const login = (email, password) => {
+  const loginEmailAndPassword = (email, password) => {
     return auth.signInWithEmailAndPassword(email, password);
   };
 
@@ -34,13 +34,15 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscriber = auth.onAuthStateChanged((user) => {
-      setCurrenUser(user);
       if (user) {
         db.collection("users")
           .doc(user.uid)
-          .onSnapshot((doc) => {
-            setCurrenUser(doc.data());
-          });
+          .onSnapshot(
+            (doc) => {
+              setCurrenUser(doc.data());
+            },
+            (err) => console.log(err.message)
+          );
       } else {
         setCurrenUser(null);
       }
@@ -52,8 +54,8 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const value = {
-    signup,
-    login,
+    signupEmailAndPassword,
+    loginEmailAndPassword,
     logout,
     currentUser,
   };

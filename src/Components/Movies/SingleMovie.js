@@ -1,9 +1,13 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import "./SingleMovie.css";
 import * as IoIcons from "react-icons/io";
+import * as FiIcons from "react-icons/fi";
 
-const SingleMovie = ({ movie, handleButton }) => {
+const SingleMovie = ({ movie, handleButton, isAdded }) => {
+  const [added, setAdded] = useState(isAdded);
+
   const handleClick = () => {
+    setAdded(!added);
     handleButton(movie);
   };
 
@@ -29,10 +33,16 @@ const SingleMovie = ({ movie, handleButton }) => {
           </div>
           <div className="lower-part">
             <button className="btn btn-outline-success" onClick={handleClick}>
-              Add to watchlist{" "}
-              <span>
-                <IoIcons.IoMdAdd />
-              </span>
+              {!added ? (
+                <span>
+                  Add to watchlist
+                  <IoIcons.IoMdAdd />
+                </span>
+              ) : (
+                <span>
+                  Remove from watchlist <FiIcons.FiMinusCircle />{" "}
+                </span>
+              )}
             </button>
           </div>
         </div>

@@ -13,7 +13,7 @@ const Login = () => {
 
   const { email, password } = formData;
 
-  const { login } = useAuth();
+  const { loginEmailAndPassword } = useAuth();
 
   const history = useHistory();
 
@@ -29,7 +29,7 @@ const Login = () => {
     setLoading(true);
     try {
       setAlert({ message: "", type: "" });
-      await login(email, password);
+      await loginEmailAndPassword(email, password);
       history.push("/movies/top");
     } catch (err) {
       setAlert({ message: "Invalid email or password", type: "danger" });
@@ -69,7 +69,11 @@ const Login = () => {
           </div>
           <div className="form-group">
             <button className="btn" disabled={loading}>
-              {!loading ? <CircularProgress color="#fffff" /> : "Login"}
+              {loading ? (
+                <CircularProgress color="primary" size="1rem" />
+              ) : (
+                "Login"
+              )}
             </button>
             <span>
               <Link to="/signup">Signup</Link>

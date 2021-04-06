@@ -1,6 +1,5 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment } from "react";
 import SingleMovie from "./SingleMovie";
-import axios from "axios";
 import firebase from "firebase";
 import { db } from "./../../firebase";
 import { useAuth } from "./../../Contexts/AuthContext";
@@ -30,16 +29,23 @@ const MyMovies = () => {
       <div className="movies">
         <div className="container">
           <div className="row">
-            {movies.length > 0 &&
+            {movies.length > 0 ? (
               movies.map((movie, index) => (
                 <div className="col-lg-3 col-md-4 col-sm-6 movies-container">
                   <SingleMovie
                     movie={movie}
                     key={index}
+                    isAdded={true}
                     handleButton={removeMovieFromWatchlist}
                   />
                 </div>
-              ))}
+              ))
+            ) : (
+              <div className="not-found">
+                <h2>No movies in your watchlist!</h2>
+                <h4>Add some to get started!</h4>
+              </div>
+            )}
           </div>
         </div>
       </div>

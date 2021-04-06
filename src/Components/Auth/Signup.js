@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "./../../Contexts/AuthContext";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +11,7 @@ const Signup = () => {
     password1: "",
   });
 
-  const { signup } = useAuth();
+  const { signupEmailAndPassword } = useAuth();
 
   const [alert, setAlert] = useState({
     message: "",
@@ -35,7 +36,7 @@ const Signup = () => {
     }
     try {
       setAlert({ message: "", type: "" });
-      await signup(email, password, name);
+      await signupEmailAndPassword(email, password, name);
       history.push("/movies/top");
     } catch (err) {
       setAlert({ message: "Could not create account", type: "danger" });
@@ -95,7 +96,11 @@ const Signup = () => {
           </div>
           <div className="form-group">
             <button className="btn" disabled={loading}>
-              Signup
+              {loading ? (
+                <CircularProgress color="#fffff" size="1rem" />
+              ) : (
+                "Signup"
+              )}
             </button>
             <span>
               <Link to="/login">Login</Link>

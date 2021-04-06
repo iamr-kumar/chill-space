@@ -28,7 +28,6 @@ const Navbar = ({ history }) => {
   const handleLogout = async () => {
     try {
       await logout();
-      history.push("/login");
     } catch (err) {
       console.log(err);
     }
