@@ -35,7 +35,7 @@ const Homepage = () => {
           ) : (
             <div className="container">
               <h2 className="title">
-                Chill <span>Space</span>
+                BINGE <span>LIST</span>
               </h2>
               <p>
                 Watch. <span>Read.</span> Play.
