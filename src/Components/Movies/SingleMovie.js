@@ -32,7 +32,12 @@ const SingleMovie = ({ movie, handleButton, isAdded }) => {
             <span className="rating">{movie.vote_average}</span>
           </div>
           <div className="lower-part">
-            <button className="btn btn-outline-success" onClick={handleClick}>
+            <button
+              className={
+                "btn " + (added ? " is-added " : "btn-outline-success")
+              }
+              onClick={handleClick}
+            >
               {!added ? (
                 <span>
                   Add to watchlist

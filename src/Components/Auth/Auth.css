@@ -35,3 +35,7 @@
   color: #5221e6;
   text-decoration: none;
 }
+
+.Auth .google-button {
+  margin-bottom: 1rem;
+}

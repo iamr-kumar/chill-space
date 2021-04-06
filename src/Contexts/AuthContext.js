@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
-import { auth, db } from "../firebase";
+import { auth, db, googleProvider } from "../firebase";
 
 const AuthContext = createContext();
 
@@ -19,6 +19,7 @@ const AuthProvider = ({ children }) => {
         name: name,
         email: email,
         uid: data.user.uid,
+        picture: null,
         movies: [],
       });
     });
@@ -26,6 +27,24 @@ const AuthProvider = ({ children }) => {
 
   const loginEmailAndPassword = (email, password) => {
     return auth.signInWithEmailAndPassword(email, password);
+  };
+
+  const signInWithGoogle = () => {
+    return auth.signInWithPopup(googleProvider).then((data) => {
+      if (data.additionalUserInfo.isNewUser) {
+        return db.collection("users").doc(data.user.uid).set({
+          name: data.additionalUserInfo.profile.name,
+          email: data.additionalUserInfo.profile.email,
+          uid: data.user.uid,
+          picture: data.additionalUserInfo.profile.picture,
+          movies: [],
+        });
+      } else {
+        return new Promise((resolve, reject) => {
+          resolve("success!");
+        });
+      }
+    });
   };
 
   const logout = () => {
@@ -56,6 +75,7 @@ const AuthProvider = ({ children }) => {
   const value = {
     signupEmailAndPassword,
     loginEmailAndPassword,
+    signInWithGoogle,
     logout,
     currentUser,
   };

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "./../../Contexts/AuthContext";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import GoogleButton from "react-google-button";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +12,7 @@ const Signup = () => {
     password1: "",
   });
 
-  const { signupEmailAndPassword } = useAuth();
+  const { signupEmailAndPassword, signInWithGoogle } = useAuth();
 
   const [alert, setAlert] = useState({
     message: "",
@@ -40,8 +41,19 @@ const Signup = () => {
       history.push("/movies/top");
     } catch (err) {
       setAlert({ message: "Could not create account", type: "danger" });
+      setLoading(false);
     }
-    setLoading(false);
+  };
+
+  const handleGoogleSignin = async () => {
+    try {
+      setAlert({ message: "", type: "" });
+      await signInWithGoogle();
+      history.push("/movies/top");
+    } catch (err) {
+      setAlert({ message: "Could not sign in", type: "danger" });
+      console.log(err);
+    }
   };
 
   return (
@@ -107,6 +119,10 @@ const Signup = () => {
             </span>
           </div>
         </form>
+
+        <div className="google-button">
+          <GoogleButton onClick={handleGoogleSignin} />
+        </div>
       </div>
     </div>
   );

@@ -69,7 +69,7 @@ const Movies = () => {
               ))
             ) : (
               <div className="spinner">
-                <CircularProgress color="primary" />
+                <CircularProgress color="secondary" />
               </div>
             )}
           </div>

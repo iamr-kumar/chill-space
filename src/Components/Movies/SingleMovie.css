@@ -89,7 +89,8 @@
   color: #059429;
 }
 
-.lower-part .btn:hover {
+.lower-part .btn:hover,
+.btn.is-added {
   background-color: #059429;
   color: #f5f5f5;
 }
