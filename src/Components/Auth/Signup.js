@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "./../../Contexts/AuthContext";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import GoogleButton from "react-google-button";
@@ -20,8 +20,6 @@ const Signup = () => {
   });
 
   const [loading, setLoading] = useState(false);
-
-  const history = useHistory();
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

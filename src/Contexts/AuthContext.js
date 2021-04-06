@@ -74,7 +74,7 @@ const AuthProvider = ({ children }) => {
     });
 
     return unsubscriber;
-  }, []);
+  }, [history]);
 
   const value = {
     signupEmailAndPassword,

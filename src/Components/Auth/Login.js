@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../Contexts/AuthContext";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import GoogleButton from "react-google-button";
@@ -14,9 +14,7 @@ const Login = () => {
 
   const { email, password } = formData;
 
-  const { loginEmailAndPassword, signInWithGoogle, currentUser } = useAuth();
-
-  const history = useHistory();
+  const { loginEmailAndPassword, signInWithGoogle } = useAuth();
 
   const [alert, setAlert] = useState({
     message: "",
